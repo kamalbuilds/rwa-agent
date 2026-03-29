@@ -1,4 +1,4 @@
-export type AgentRole = "research" | "risk" | "trading" | "portfolio";
+export type AgentRole = "research" | "risk" | "trading" | "portfolio" | "compliance";
 
 export interface AgentMessage {
   id: string;

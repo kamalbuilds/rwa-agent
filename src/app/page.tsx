@@ -6,6 +6,7 @@ import {
   RefreshCcw,
   ArrowRight,
   Layers,
+  Scale,
 } from "lucide-react";
 
 export default function Home() {
@@ -28,37 +29,45 @@ export default function Home() {
 
         <p className="max-w-lg text-lg leading-relaxed text-[var(--muted-foreground)]">
           AI-powered multi-agent system for intelligent Real World Asset
-          portfolio management. Research, assess risk, trade, and rebalance
-          tokenized treasuries, gold, and yield products on BNB Chain.
+          portfolio management. Research, assess risk, ensure compliance, trade,
+          and rebalance tokenized treasuries, gold, and yield products on BNB
+          Chain.
         </p>
 
-        <div className="grid w-full max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid w-full max-w-2xl grid-cols-2 gap-3 sm:grid-cols-5">
           <div className="flex flex-col items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
             <Brain className="h-5 w-5 text-violet-400" />
-            <span className="text-sm font-medium">Research Agent</span>
+            <span className="text-sm font-medium">Research</span>
             <span className="text-xs text-[var(--muted-foreground)]">
-              Monitors yields, prices, news
+              Yields, prices, news
             </span>
           </div>
           <div className="flex flex-col items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
             <Shield className="h-5 w-5 text-amber-400" />
-            <span className="text-sm font-medium">Risk Agent</span>
+            <span className="text-sm font-medium">Risk</span>
             <span className="text-xs text-[var(--muted-foreground)]">
-              Liquidity, depeg, contract risk
+              Liquidity, depeg, contracts
             </span>
           </div>
           <div className="flex flex-col items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
             <TrendingUp className="h-5 w-5 text-emerald-400" />
-            <span className="text-sm font-medium">Trading Agent</span>
+            <span className="text-sm font-medium">Trading</span>
             <span className="text-xs text-[var(--muted-foreground)]">
               PancakeSwap execution
             </span>
           </div>
           <div className="flex flex-col items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
-            <RefreshCcw className="h-5 w-5 text-blue-400" />
-            <span className="text-sm font-medium">Portfolio Agent</span>
+            <Scale className="h-5 w-5 text-cyan-400" />
+            <span className="text-sm font-medium">Compliance</span>
             <span className="text-xs text-[var(--muted-foreground)]">
-              Auto-rebalancing, yield optimization
+              KYC, sanctions, audit
+            </span>
+          </div>
+          <div className="flex flex-col items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+            <RefreshCcw className="h-5 w-5 text-blue-400" />
+            <span className="text-sm font-medium">Portfolio</span>
+            <span className="text-xs text-[var(--muted-foreground)]">
+              Auto-rebalancing
             </span>
           </div>
         </div>
@@ -82,7 +91,7 @@ export default function Home() {
             <div className="h-8 w-px bg-[var(--border)]" />
             <div>
               <span className="text-[var(--muted-foreground)]">Agents</span>
-              <p className="text-lg font-bold text-violet-400">4</p>
+              <p className="text-lg font-bold text-violet-400">5</p>
             </div>
           </div>
         </div>

@@ -1,13 +1,14 @@
 "use client";
 
 import { useDashboardStore } from "@/lib/store";
-import { Activity, Brain, Shield, TrendingUp, RefreshCcw } from "lucide-react";
+import { Activity, Brain, Shield, TrendingUp, RefreshCcw, Scale } from "lucide-react";
 import type { AgentRole } from "@/lib/agents/types";
 
 const agentIcons: Record<AgentRole, typeof Brain> = {
   research: Brain,
   risk: Shield,
   trading: TrendingUp,
+  compliance: Scale,
   portfolio: RefreshCcw,
 };
 
@@ -15,6 +16,7 @@ const agentColors: Record<AgentRole, string> = {
   research: "text-violet-400",
   risk: "text-amber-400",
   trading: "text-emerald-400",
+  compliance: "text-cyan-400",
   portfolio: "text-blue-400",
 };
 

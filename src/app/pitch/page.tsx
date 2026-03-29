@@ -4,6 +4,7 @@ import {
   Shield,
   TrendingUp,
   RefreshCcw,
+  Scale,
   Target,
   Users,
   Rocket,
@@ -126,6 +127,16 @@ export default function PitchPage() {
               </div>
             </div>
             <div className="flex items-start gap-4 rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 text-left">
+              <Scale className="mt-1 h-6 w-6 shrink-0 text-cyan-400" />
+              <div>
+                <h3 className="font-bold">Compliance Agent</h3>
+                <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+                  Checks KYC requirements, jurisdiction restrictions, sanctions
+                  screening, and audit status before every trade execution.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 text-left sm:col-span-2 sm:mx-auto sm:max-w-md">
               <RefreshCcw className="mt-1 h-6 w-6 shrink-0 text-blue-400" />
               <div>
                 <h3 className="font-bold">Portfolio Agent</h3>
@@ -165,6 +176,12 @@ export default function PitchPage() {
               },
               {
                 step: "4",
+                title: "Compliance Check",
+                desc: "Verify KYC, sanctions, jurisdiction, and audit status before execution",
+                color: "text-cyan-400 bg-cyan-500/10",
+              },
+              {
+                step: "5",
                 title: "Execute & Rebalance",
                 desc: "Trade on PancakeSwap, maintain target allocations, optimize yield",
                 color: "text-blue-400 bg-blue-500/10",

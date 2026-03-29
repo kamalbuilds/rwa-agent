@@ -2,6 +2,7 @@ import { AgentMessage, PortfolioState, AgentDecision, RiskAssessment } from "./t
 import { runResearchCycle } from "./research";
 import { runRiskCycle } from "./risk";
 import { generateTradeSignals } from "./trading";
+import { runComplianceCycle } from "./compliance";
 import { runPortfolioCycle, getPortfolio } from "./portfolio";
 
 export interface CycleResult {
@@ -34,9 +35,13 @@ export function runAgentCycle(): CycleResult {
   );
   allMessages.push(...tradeMessages);
 
-  // Phase 4: Portfolio Agent executes and rebalances
+  // Phase 4: Compliance Agent reviews decisions
+  const { messages: complianceMessages, approvedDecisions } = runComplianceCycle(decisions);
+  allMessages.push(...complianceMessages);
+
+  // Phase 5: Portfolio Agent executes approved trades only
   const { messages: portfolioMessages, portfolio } = runPortfolioCycle(
-    decisions,
+    approvedDecisions,
     assessments
   );
   allMessages.push(...portfolioMessages);
@@ -44,7 +49,7 @@ export function runAgentCycle(): CycleResult {
   return {
     messages: allMessages,
     portfolio,
-    decisions,
+    decisions: approvedDecisions,
     riskAssessments: assessments,
     cycleNumber: cycleCount,
     timestamp: Date.now(),

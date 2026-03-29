@@ -14,6 +14,7 @@ import {
   Pause,
   RefreshCcw,
   Zap,
+  Link2,
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -23,14 +24,19 @@ export default function DashboardPage() {
     isRunning,
     isLoading,
     error,
+    chainStatus,
     runCycle,
     startAutorun,
     stopAutorun,
+    fetchChainStatus,
   } = useDashboardStore();
 
   useEffect(() => {
     runCycle();
-  }, [runCycle]);
+    fetchChainStatus();
+    const chainInterval = setInterval(fetchChainStatus, 15000);
+    return () => clearInterval(chainInterval);
+  }, [runCycle, fetchChainStatus]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -52,6 +58,24 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Chain Status */}
+          {chainStatus && (
+            <div className="hidden sm:flex items-center gap-3 mr-3 text-xs text-[var(--muted-foreground)]">
+              <div className="flex items-center gap-1">
+                <Link2 className="h-3 w-3" />
+                <span className={chainStatus.connected ? "text-emerald-400" : "text-red-400"}>
+                  {chainStatus.connected ? "Connected" : "Disconnected"}
+                </span>
+              </div>
+              {chainStatus.connected && (
+                <>
+                  <span>Block #{chainStatus.blockNumber}</span>
+                  <span>Gas: {chainStatus.gasPrice}</span>
+                  <span>BNB: ${chainStatus.bnbPrice.toFixed(2)}</span>
+                </>
+              )}
+            </div>
+          )}
           <button
             onClick={runCycle}
             disabled={isLoading}

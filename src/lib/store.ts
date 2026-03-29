@@ -3,6 +3,13 @@
 import { create } from "zustand";
 import { AgentMessage, PortfolioState, AgentDecision, RiskAssessment } from "./agents/types";
 
+interface ChainStatus {
+  blockNumber: string;
+  gasPrice: string;
+  bnbPrice: number;
+  connected: boolean;
+}
+
 interface DashboardState {
   portfolio: PortfolioState | null;
   messages: AgentMessage[];
@@ -13,9 +20,11 @@ interface DashboardState {
   isLoading: boolean;
   error: string | null;
   pnlHistory: { time: string; value: number }[];
+  chainStatus: ChainStatus | null;
   runCycle: () => Promise<void>;
   startAutorun: () => void;
   stopAutorun: () => void;
+  fetchChainStatus: () => Promise<void>;
 }
 
 let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -30,6 +39,7 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
   isLoading: false,
   error: null,
   pnlHistory: [],
+  chainStatus: null,
 
   runCycle: async () => {
     set({ isLoading: true, error: null });
@@ -60,6 +70,24 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
       });
     } catch (err) {
       set({ error: (err as Error).message, isLoading: false });
+    }
+  },
+
+  fetchChainStatus: async () => {
+    try {
+      const res = await fetch("/api/chain");
+      if (!res.ok) return;
+      const data = await res.json();
+      set({
+        chainStatus: {
+          blockNumber: data.blockNumber,
+          gasPrice: data.gasPrice,
+          bnbPrice: data.bnbPrice,
+          connected: data.connected,
+        },
+      });
+    } catch {
+      set({ chainStatus: { blockNumber: "0", gasPrice: "0", bnbPrice: 600, connected: false } });
     }
   },
 
