@@ -8,14 +8,16 @@ import { RWAYields } from "@/components/dashboard/rwa-yields";
 import { RiskPanel } from "@/components/dashboard/risk-panel";
 import { PositionsTable } from "@/components/dashboard/positions-table";
 import { PnlChart } from "@/components/dashboard/pnl-chart";
+import { AgentEconomy } from "@/components/dashboard/agent-economy";
 import {
-  Layers,
+  BarChart3,
   Play,
   Pause,
   RefreshCcw,
   Zap,
-  Link2,
+  ArrowLeft,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const {
@@ -29,90 +31,99 @@ export default function DashboardPage() {
     startAutorun,
     stopAutorun,
     fetchChainStatus,
+    fetchX402Data,
   } = useDashboardStore();
 
   useEffect(() => {
     runCycle();
     fetchChainStatus();
+    fetchX402Data();
     const chainInterval = setInterval(fetchChainStatus, 15000);
-    return () => clearInterval(chainInterval);
-  }, [runCycle, fetchChainStatus]);
+    const x402Interval = setInterval(fetchX402Data, 20000);
+    return () => {
+      clearInterval(chainInterval);
+      clearInterval(x402Interval);
+    };
+  }, [runCycle, fetchChainStatus, fetchX402Data]);
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-[var(--border)] px-6 py-3">
+      <header className="nav-glass sticky top-0 z-50 flex items-center justify-between px-4 lg:px-6 py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10">
-            <Layers className="h-4 w-4 text-blue-400" />
+          <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+            <BarChart3 className="h-4 w-4 text-primary" />
           </div>
-          <h1 className="text-lg font-bold">RWA Agent</h1>
-          <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-400">
+          <h1 className="text-base font-semibold">RWA Agent</h1>
+          <span className="glow-badge text-[10px] font-medium px-2 py-0.5 rounded-full text-primary">
             BNB Chain
           </span>
           {cycleNumber > 0 && (
-            <span className="text-xs text-[var(--muted-foreground)]">
+            <span className="text-xs text-muted-foreground font-mono">
               Cycle #{cycleNumber}
             </span>
           )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {/* Chain Status */}
           {chainStatus && (
-            <div className="hidden sm:flex items-center gap-3 mr-3 text-xs text-[var(--muted-foreground)]">
-              <div className="flex items-center gap-1">
-                <Link2 className="h-3 w-3" />
-                <span className={chainStatus.connected ? "text-emerald-400" : "text-red-400"}>
-                  {chainStatus.connected ? "Connected" : "Disconnected"}
-                </span>
+            <div className="hidden lg:flex items-center gap-3 mr-3 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1.5">
+                <div className={`h-2 w-2 rounded-full ${chainStatus.connected ? "pulse-dot" : "bg-red-400"}`} />
+                <span>{chainStatus.connected ? "Connected" : "Offline"}</span>
               </div>
               {chainStatus.connected && (
                 <>
-                  <span>Block #{chainStatus.blockNumber}</span>
-                  <span>Gas: {chainStatus.gasPrice}</span>
-                  <span>BNB: ${chainStatus.bnbPrice.toFixed(2)}</span>
+                  <span className="text-border/30">|</span>
+                  <span className="font-mono">Block #{chainStatus.blockNumber}</span>
+                  <span className="text-border/30">|</span>
+                  <span className="font-mono">Gas: {chainStatus.gasPrice}</span>
+                  <span className="text-border/30">|</span>
+                  <span className="text-primary font-semibold font-mono">BNB ${chainStatus.bnbPrice.toFixed(2)}</span>
                 </>
               )}
             </div>
           )}
+
           <button
             onClick={runCycle}
             disabled={isLoading}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-xs font-medium transition-colors hover:bg-[var(--muted)] disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-border/50 text-sm font-medium hover:bg-card/50 transition-colors disabled:opacity-50"
           >
-            <RefreshCcw className={`h-3 w-3 ${isLoading ? "animate-spin" : ""}`} />
+            <RefreshCcw className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} />
             Run Cycle
           </button>
+
           <button
             onClick={isRunning ? stopAutorun : startAutorun}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               isRunning
-                ? "bg-red-500/10 text-red-400 hover:bg-red-500/20"
-                : "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                ? "bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20"
+                : "bg-primary text-primary-foreground hover:bg-primary/90"
             }`}
           >
             {isRunning ? (
-              <>
-                <Pause className="h-3 w-3" /> Stop
-              </>
+              <><Pause className="h-3.5 w-3.5" /> Stop</>
             ) : (
-              <>
-                <Play className="h-3 w-3" /> Auto
-              </>
+              <><Play className="h-3.5 w-3.5" /> Auto</>
             )}
           </button>
+
           {isRunning && (
-            <div className="flex items-center gap-1 text-xs text-emerald-400">
-              <Zap className="h-3 w-3" />
-              <span>Live</span>
+            <div className="glow-badge flex items-center gap-1.5 px-2.5 py-1 rounded-full">
+              <Zap className="h-3 w-3 text-emerald-400" />
+              <span className="text-xs text-emerald-400 font-medium">Live</span>
             </div>
           )}
         </div>
       </header>
 
       {error && (
-        <div className="border-b border-red-500/20 bg-red-500/5 px-6 py-2 text-center text-xs text-red-400">
+        <div className="border-b border-destructive/20 bg-destructive/5 px-6 py-2 text-center text-xs text-destructive">
           {error}
         </div>
       )}
@@ -141,6 +152,14 @@ export default function DashboardPage() {
 
           {/* Row 4: Agent Activity */}
           <AgentActivity />
+
+          {/* Row 5: Agent Economy */}
+          <div className="border-t border-white/5 pt-6 mt-6">
+            <h2 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-4 px-2">
+              x402 Agent Economy
+            </h2>
+            <AgentEconomy />
+          </div>
         </div>
       </div>
     </div>
