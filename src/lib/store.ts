@@ -10,6 +10,31 @@ interface ChainStatus {
   connected: boolean;
 }
 
+export interface AgentIdentity {
+  id: string;
+  name: string;
+  role: string;
+  reputationScore: number;
+  totalEarnings: number;
+  currentBalance: number;
+  performanceRank: number;
+}
+
+export interface AgentPayment {
+  from: string;
+  to: string;
+  amount: number;
+  reason: string;
+  timestamp: number;
+}
+
+export interface X402Data {
+  agents: AgentIdentity[];
+  payments: AgentPayment[];
+  totalVolume: number;
+  leaderboard: AgentIdentity[];
+}
+
 interface DashboardState {
   portfolio: PortfolioState | null;
   messages: AgentMessage[];
@@ -21,10 +46,13 @@ interface DashboardState {
   error: string | null;
   pnlHistory: { time: string; value: number }[];
   chainStatus: ChainStatus | null;
+  x402: X402Data | null;
+  x402Loading: boolean;
   runCycle: () => Promise<void>;
   startAutorun: () => void;
   stopAutorun: () => void;
   fetchChainStatus: () => Promise<void>;
+  fetchX402Data: () => Promise<void>;
 }
 
 let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -40,6 +68,8 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
   error: null,
   pnlHistory: [],
   chainStatus: null,
+  x402: null,
+  x402Loading: false,
 
   runCycle: async () => {
     set({ isLoading: true, error: null });
@@ -103,5 +133,32 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
     if (intervalId) clearInterval(intervalId);
     intervalId = null;
     set({ isRunning: false });
+  },
+
+  fetchX402Data: async () => {
+    set({ x402Loading: true });
+    try {
+      const res = await fetch("/api/x402");
+      if (!res.ok) throw new Error("Failed to fetch x402 data");
+      const data = await res.json();
+
+      // Handle both old and new API response formats
+      const agents = data.agents || data.agentIdentities || [];
+      const payments = data.payments || data.globalLedger || [];
+      const leaderboard = data.leaderboard || agents.slice(0, 5);
+
+      set({
+        x402: {
+          agents,
+          payments: Array.isArray(payments) ? payments : [],
+          totalVolume: data.totalVolume || 0,
+          leaderboard,
+        },
+        x402Loading: false,
+      });
+    } catch (err) {
+      console.error("Error fetching x402 data:", err);
+      set({ x402Loading: false });
+    }
   },
 }));

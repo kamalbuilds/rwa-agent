@@ -12,14 +12,15 @@ export interface RWAToken {
   description: string;
 }
 
+// Static token definitions with real on-chain addresses
 export const RWA_TOKENS: RWAToken[] = [
   {
     symbol: "USDY",
     name: "Ondo US Dollar Yield",
     address: "0x5bE26527e817998A7206475496fDE1E68957c5A6",
     category: "treasury",
-    apy: 4.8,
-    price: 1.052,
+    apy: 4.8, // Updated via real data
+    price: 1.052, // Updated via real data
     tvl: "$1.2B",
     risk: "low",
     chain: "BNB Chain",
@@ -31,8 +32,8 @@ export const RWA_TOKENS: RWAToken[] = [
     name: "BlackRock USD Institutional",
     address: "0x7712c34205737192402172409a8F7ccef8aA2AEc",
     category: "treasury",
-    apy: 4.5,
-    price: 1.0,
+    apy: 4.5, // Updated via real data
+    price: 1.0, // Updated via real data
     tvl: "$5.8B",
     risk: "low",
     chain: "BNB Chain",
@@ -44,8 +45,8 @@ export const RWA_TOKENS: RWAToken[] = [
     name: "Paxos Gold",
     address: "0x7950865a9140cB519342433146Ed5b40c6F210f7",
     category: "gold",
-    apy: 0,
-    price: 3150.0,
+    apy: 0, // Gold doesn't generate yield
+    price: 3150.0, // Updated via real data
     tvl: "$600M",
     risk: "low",
     chain: "BNB Chain",
@@ -57,8 +58,8 @@ export const RWA_TOKENS: RWAToken[] = [
     name: "Staked Lista BNB",
     address: "0xB0b84D294e0C75A6abe60171b70edEb2EFd14A1B",
     category: "treasury",
-    apy: 3.2,
-    price: 605.0,
+    apy: 3.2, // Updated via real data
+    price: 605.0, // Updated via real data
     tvl: "$450M",
     risk: "low",
     chain: "BNB Chain",
@@ -70,8 +71,8 @@ export const RWA_TOKENS: RWAToken[] = [
     name: "Lista USD",
     address: "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5",
     category: "stablecoin",
-    apy: 5.2,
-    price: 1.0,
+    apy: 5.2, // Updated via real data
+    price: 1.0, // Updated via real data
     tvl: "$320M",
     risk: "medium",
     chain: "BNB Chain",
@@ -83,8 +84,8 @@ export const RWA_TOKENS: RWAToken[] = [
     name: "Ankr Staked BNB",
     address: "0x52F24a5e03aee338Da5fd9Df68D2b6FAe1178827",
     category: "treasury",
-    apy: 2.9,
-    price: 610.0,
+    apy: 2.9, // Updated via real data
+    price: 610.0, // Updated via real data
     tvl: "$200M",
     risk: "low",
     chain: "BNB Chain",

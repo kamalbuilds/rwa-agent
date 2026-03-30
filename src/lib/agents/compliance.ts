@@ -1,5 +1,6 @@
 import { AgentMessage, AgentRole, AgentDecision } from "./types";
 import { RWA_TOKENS, RWAToken } from "../rwa/tokens";
+import { screenWallet, isWalletBlacklisted } from "../x402/compliance-screening";
 
 const AGENT: AgentRole = "compliance";
 
@@ -117,6 +118,10 @@ export function runComplianceCycle(
 
     const check = checkTokenCompliance(token);
 
+    // Simulate wallet screening for the trade
+    const simulatedWalletAddress = `0x${Math.random().toString(16).slice(2).padEnd(40, "0")}`;
+    const complianceReport = screenWallet(simulatedWalletAddress);
+
     if (!check.sanctionsClean) {
       messages.push({
         id: generateId(),
@@ -128,6 +133,42 @@ export function runComplianceCycle(
         data: { blocked: true, token: decision.token, reason: "sanctions" },
       });
       continue;
+    }
+
+    if (complianceReport.isBlacklisted) {
+      messages.push({
+        id: generateId(),
+        agent: AGENT,
+        timestamp: Date.now(),
+        type: "alert",
+        content: `BLOCKED: ${decision.token} transaction rejected. Wallet flagged in screening: risk level ${complianceReport.riskLevel}.`,
+        confidence: 1.0,
+        data: {
+          blocked: true,
+          token: decision.token,
+          reason: "wallet_screening",
+          riskScore: complianceReport.riskScore,
+        },
+      });
+      continue;
+    }
+
+    if (complianceReport.riskLevel === "critical" || complianceReport.riskLevel === "high") {
+      messages.push({
+        id: generateId(),
+        agent: AGENT,
+        timestamp: Date.now(),
+        type: "alert",
+        content: `WARNING: ${decision.token} ${decision.action} flagged. Wallet risk level: ${complianceReport.riskLevel} (score: ${complianceReport.riskScore}). Proceeding with enhanced monitoring.`,
+        confidence: 0.7,
+        data: {
+          warning: true,
+          token: decision.token,
+          reason: "high_risk_wallet",
+          riskScore: complianceReport.riskScore,
+          flags: complianceReport.flags,
+        },
+      });
     }
 
     if (check.regulatoryStatus === "restricted") {
