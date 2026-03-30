@@ -142,16 +142,59 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
       if (!res.ok) throw new Error("Failed to fetch x402 data");
       const data = await res.json();
 
-      // Handle both old and new API response formats
-      const agents = data.agents || data.agentIdentities || [];
-      const payments = data.payments || data.globalLedger || [];
-      const leaderboard = data.leaderboard || agents.slice(0, 5);
+      const weiToEth = (wei: string | number) => Number(wei) / 1e18;
+
+      // agentIdentities may be an object keyed by ID or an array
+      let rawAgents: Record<string, unknown>[] = [];
+      if (Array.isArray(data.agentIdentities)) {
+        rawAgents = data.agentIdentities;
+      } else if (data.agentIdentities && typeof data.agentIdentities === "object") {
+        rawAgents = Object.values(data.agentIdentities) as Record<string, unknown>[];
+      } else if (Array.isArray(data.agents)) {
+        rawAgents = data.agents;
+      }
+
+      // Transform agents to expected shape
+      const agents: AgentIdentity[] = rawAgents.map((a: Record<string, unknown>, i: number) => ({
+        id: (a.agentId || a.id || `agent-${i}`) as string,
+        name: (a.name || "Agent") as string,
+        role: (a.role || "unknown") as string,
+        reputationScore: Number(a.reputation || a.reputationScore || 0),
+        totalEarnings: weiToEth((a.totalEarnings as string) || "0"),
+        currentBalance: weiToEth((a.currentBalance as string) || (a.stakingAmount as string) || "0"),
+        performanceRank: i + 1,
+      }));
+
+      // Transform leaderboard
+      const leaderboard: AgentIdentity[] = (Array.isArray(data.leaderboard) ? data.leaderboard : []).map(
+        (a: Record<string, unknown>, i: number) => ({
+          id: (a.agentId || a.id || `agent-${i}`) as string,
+          name: (a.name || "Agent") as string,
+          role: (a.role || "unknown") as string,
+          reputationScore: Number(a.reputation || a.reputationScore || 0),
+          totalEarnings: weiToEth((a.totalEarnings as string) || "0"),
+          currentBalance: weiToEth((a.currentBalance as string) || (a.stakingAmount as string) || "0"),
+          performanceRank: i + 1,
+        })
+      );
+
+      // Transform payments from globalLedger
+      const rawPayments = data.globalLedger || data.payments || [];
+      const payments: AgentPayment[] = (Array.isArray(rawPayments) ? rawPayments : []).map(
+        (p: Record<string, unknown>) => ({
+          from: typeof p.from === "object" && p.from ? (p.from as Record<string, unknown>).name as string : String(p.from),
+          to: typeof p.to === "object" && p.to ? (p.to as Record<string, unknown>).name as string : String(p.to),
+          amount: weiToEth((p.amount as string) || "0"),
+          reason: (p.reason || "") as string,
+          timestamp: Number(p.timestamp || Date.now()),
+        })
+      );
 
       set({
         x402: {
           agents,
-          payments: Array.isArray(payments) ? payments : [],
-          totalVolume: data.totalVolume || 0,
+          payments,
+          totalVolume: weiToEth(data.totalVolume || "0"),
           leaderboard,
         },
         x402Loading: false,

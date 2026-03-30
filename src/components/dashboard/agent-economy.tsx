@@ -69,7 +69,7 @@ export function AgentEconomy() {
             </span>
           </div>
           <p className="text-3xl font-bold text-emerald-400 font-mono">
-            {x402.totalVolume.toFixed(2)} BNB
+            {Number(x402.totalVolume || 0).toFixed(2)} BNB
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export function AgentEconomy() {
                     Balance
                   </span>
                   <span className="text-sm font-bold text-emerald-400 font-mono">
-                    {agent.currentBalance.toFixed(4)}
+                    {Number(agent.currentBalance || 0).toFixed(4)}
                   </span>
                 </div>
                 <div className="flex flex-col gap-0.5">
@@ -142,7 +142,7 @@ export function AgentEconomy() {
                     Earnings
                   </span>
                   <span className="text-sm font-bold text-blue-400 font-mono">
-                    {agent.totalEarnings.toFixed(4)}
+                    {Number(agent.totalEarnings || 0).toFixed(4)}
                   </span>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export function AgentEconomy() {
                   <div className="flex items-end gap-2 flex-shrink-0">
                     <div className="text-right">
                       <p className="text-xs font-mono font-bold text-emerald-400">
-                        {payment.amount.toFixed(4)} BNB
+                        {Number(payment.amount || 0).toFixed(4)} BNB
                       </p>
                       <p className="text-[10px] text-muted-foreground/50 flex items-center gap-1">
                         <Clock className="h-2.5 w-2.5" />
