@@ -12,6 +12,12 @@ import {
   DollarSign,
   BarChart3,
   Lock,
+  Zap,
+  Coins,
+  PieChart,
+  Swords,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 
 function Section({
@@ -246,7 +252,89 @@ export default function PitchPage() {
         </div>
       </Section>
 
-      {/* Slide 6: Market Opportunity */}
+      {/* Slide 6: Tokenomics */}
+      <Section className="bg-[var(--card)]">
+        <div className="flex max-w-4xl flex-col items-center gap-8 text-center">
+          <h2 className="text-3xl font-bold sm:text-4xl">Tokenomics</h2>
+          <p className="text-lg text-[var(--muted-foreground)]">
+            RWAI token powers the RWA Agent ecosystem
+          </p>
+
+          {/* Token Utility */}
+          <div className="grid gap-4 sm:grid-cols-3 w-full">
+            <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
+              <Coins className="mx-auto h-6 w-6 text-blue-400" />
+              <h3 className="mt-2 font-bold">Governance</h3>
+              <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+                RWAI holders vote on supported assets, risk parameters, and protocol upgrades
+              </p>
+            </div>
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+              <DollarSign className="mx-auto h-6 w-6 text-emerald-400" />
+              <h3 className="mt-2 font-bold">Fee Sharing</h3>
+              <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+                Staked RWAI earns 50% of protocol fees (AUM fees + performance fees)
+              </p>
+            </div>
+            <div className="rounded-xl border border-violet-500/20 bg-violet-500/5 p-5">
+              <Lock className="mx-auto h-6 w-6 text-violet-400" />
+              <h3 className="mt-2 font-bold">Premium Access</h3>
+              <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+                Stake RWAI for advanced strategies, higher allocation limits, and priority execution
+              </p>
+            </div>
+          </div>
+
+          {/* Token Distribution */}
+          <div className="w-full max-w-lg">
+            <h3 className="mb-4 text-lg font-bold">Distribution</h3>
+            <div className="flex flex-col gap-2">
+              {[
+                { label: "Community & Ecosystem", pct: 40, color: "bg-blue-500" },
+                { label: "Treasury & Development", pct: 25, color: "bg-emerald-500" },
+                { label: "Team (2yr vest)", pct: 15, color: "bg-violet-500" },
+                { label: "Liquidity & Partnerships", pct: 12, color: "bg-amber-500" },
+                { label: "Early Backers (1yr vest)", pct: 8, color: "bg-cyan-500" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-3">
+                  <span className="w-32 text-right text-sm text-[var(--muted-foreground)]">
+                    {item.label}
+                  </span>
+                  <div className="flex-1 h-6 rounded-full bg-[var(--muted)] overflow-hidden">
+                    <div
+                      className={`h-full ${item.color} rounded-full flex items-center justify-end pr-2`}
+                      style={{ width: `${item.pct}%` }}
+                    >
+                      <span className="text-xs font-bold text-white">{item.pct}%</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Revenue Model */}
+          <div className="w-full max-w-lg">
+            <h3 className="mb-4 text-lg font-bold">Revenue Model</h3>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="rounded-xl border border-[var(--border)] p-4">
+                <p className="text-2xl font-bold text-emerald-400">0.5%</p>
+                <p className="text-xs text-[var(--muted-foreground)]">Annual AUM Fee</p>
+              </div>
+              <div className="rounded-xl border border-[var(--border)] p-4">
+                <p className="text-2xl font-bold text-blue-400">10%</p>
+                <p className="text-xs text-[var(--muted-foreground)]">Performance Fee</p>
+              </div>
+              <div className="rounded-xl border border-[var(--border)] p-4">
+                <p className="text-2xl font-bold text-violet-400">$50/mo</p>
+                <p className="text-xs text-[var(--muted-foreground)]">Pro Subscription</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Slide 7: Market Opportunity */}
       <Section className="bg-[var(--card)]">
         <div className="flex max-w-3xl flex-col items-center gap-8 text-center">
           <h2 className="text-3xl font-bold sm:text-4xl">Market Opportunity</h2>
@@ -280,7 +368,61 @@ export default function PitchPage() {
         </div>
       </Section>
 
-      {/* Slide 7: Why BNB Chain */}
+      {/* Slide 8: Competitive Landscape */}
+      <Section>
+        <div className="flex max-w-4xl flex-col items-center gap-8 text-center">
+          <h2 className="text-3xl font-bold sm:text-4xl">Competitive Landscape</h2>
+          <p className="text-[var(--muted-foreground)]">
+            RWA Agent is the only solution combining AI-driven portfolio management with compliance for RWA tokens
+          </p>
+          <div className="w-full overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[var(--border)]">
+                  <th className="p-3 text-left font-bold">Feature</th>
+                  <th className="p-3 text-center font-bold text-blue-400">RWA Agent</th>
+                  <th className="p-3 text-center font-bold text-[var(--muted-foreground)]">Avalon Finance</th>
+                  <th className="p-3 text-center font-bold text-[var(--muted-foreground)]">OpenEden</th>
+                  <th className="p-3 text-center font-bold text-[var(--muted-foreground)]">Brickken</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { feature: "AI Portfolio Management", us: true, avalon: false, openeden: false, brickken: false },
+                  { feature: "Multi-Agent Risk Analysis", us: true, avalon: false, openeden: false, brickken: false },
+                  { feature: "Auto Rebalancing", us: true, avalon: false, openeden: false, brickken: false },
+                  { feature: "Compliance Engine", us: true, avalon: false, openeden: true, brickken: true },
+                  { feature: "RWA Lending", us: false, avalon: true, openeden: false, brickken: false },
+                  { feature: "Token Issuance", us: false, avalon: false, openeden: false, brickken: true },
+                  { feature: "Tokenized T-Bills", us: true, avalon: false, openeden: true, brickken: false },
+                  { feature: "BNB Chain Native", us: true, avalon: true, openeden: false, brickken: true },
+                ].map((row) => (
+                  <tr key={row.feature} className="border-b border-[var(--border)]/50">
+                    <td className="p-3 text-left text-[var(--muted-foreground)]">{row.feature}</td>
+                    <td className="p-3 text-center">
+                      {row.us ? <CheckCircle className="inline h-5 w-5 text-emerald-400" /> : <XCircle className="inline h-5 w-5 text-[var(--muted-foreground)]/30" />}
+                    </td>
+                    <td className="p-3 text-center">
+                      {row.avalon ? <CheckCircle className="inline h-5 w-5 text-emerald-400/50" /> : <XCircle className="inline h-5 w-5 text-[var(--muted-foreground)]/30" />}
+                    </td>
+                    <td className="p-3 text-center">
+                      {row.openeden ? <CheckCircle className="inline h-5 w-5 text-emerald-400/50" /> : <XCircle className="inline h-5 w-5 text-[var(--muted-foreground)]/30" />}
+                    </td>
+                    <td className="p-3 text-center">
+                      {row.brickken ? <CheckCircle className="inline h-5 w-5 text-emerald-400/50" /> : <XCircle className="inline h-5 w-5 text-[var(--muted-foreground)]/30" />}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-emerald-400 font-medium">
+            We are the intelligence layer, not another lending or issuance platform
+          </p>
+        </div>
+      </Section>
+
+      {/* Slide 9: Why BNB Chain */}
       <Section>
         <div className="flex max-w-3xl flex-col items-center gap-8 text-center">
           <h2 className="text-3xl font-bold sm:text-4xl">Why BNB Chain</h2>
