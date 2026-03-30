@@ -1,4 +1,3 @@
 {
-  "installCommand": "npm install --omit=optional",
   "buildCommand": "next build"
 }
