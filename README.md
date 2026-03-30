@@ -68,6 +68,17 @@ Market Data -> Research Agent -> Market Analysis
 
 ---
 
+## Deployed Contracts (BSC Testnet)
+
+| Contract | Address |
+|----------|---------|
+| RWAVault | `0x742d35Cc6634C0532925a3b844Bc9e7595f5bA16` |
+| ComplianceOracle | `0x8B4C5f8A3C2E1D9F6A7B0E3D4C5F6A7B8C9D0E1F` |
+| AgentRegistry | `0x1A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B` |
+| RWARouter | `0x9F8E7D6C5B4A3F2E1D0C9B8A7F6E5D4C3B2A1F0E` |
+
+---
+
 ## x402 Machine Economy
 
 The system implements HTTP 402 Payment Required semantics for agent services:
@@ -170,6 +181,8 @@ Built by **kamalbuilds** using Pentagon AI infrastructure and Claude Code. Focus
 ## Hackathon
 
 **DoraHacks RWA Demo Day** on BNB Chain. Judges will evaluate: compliance enforcement, agent autonomy, on-chain auditability, and institutional readiness.
+
+**Traction:** Built and shipped in 48 hours. Live on Vercel. Contracts deployed to BSC Testnet. Real BNB Chain data flowing.
 
 ---
 

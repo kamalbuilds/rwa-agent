@@ -38,7 +38,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const TOTAL_SLIDES = 10;
+const TOTAL_SLIDES = 12;
 
 function SlideNumber({ n }: { n: number }) {
   return (
@@ -490,6 +490,9 @@ export default function PitchPage() {
             </h2>
             <p className="text-white/40">
               Four contracts form the backbone. Not mock implementations.
+            </p>
+            <p className="text-white/30 text-sm max-w-2xl mx-auto mt-1">
+              Hybrid execution: off-chain agents for AI intelligence, on-chain smart contracts for settlement and compliance. Best of both worlds.
             </p>
           </div>
 
@@ -983,12 +986,220 @@ export default function PitchPage() {
         </div>
       </section>
 
-      {/* ─── SLIDE 10: CTA ─── */}
+      {/* ─── SLIDE 10: TOKENOMICS ─── */}
       <section
         ref={(el) => { slideRefs.current[9] = el; }}
-        className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+        className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden"
       >
         <SlideNumber n={10} />
+        <GlowOrb className="w-[600px] h-[400px] top-0 right-0 bg-violet-500/6" />
+        <GlowOrb className="w-[400px] h-[300px] bottom-0 left-0 bg-amber-400/5" />
+
+        <div className="relative z-10 w-full max-w-5xl flex flex-col gap-12">
+          <div className="text-center flex flex-col gap-4">
+            <p className="text-xs font-mono tracking-widest text-violet-400/60 uppercase">Agent Economy</p>
+            <h2 className="text-4xl sm:text-6xl font-bold leading-tight">
+              Tokenomics without<br />
+              <span className="text-violet-400">a governance token.</span>
+            </h2>
+            <p className="text-white/40 text-lg max-w-2xl mx-auto">
+              Early-stage compliant. USDC-native. Value flows to agents who perform.
+            </p>
+          </div>
+
+          {/* Top: No governance token callout */}
+          <div className="glass-card rounded-2xl p-5 border border-violet-500/20 flex items-start gap-4">
+            <div className="h-10 w-10 rounded-xl bg-violet-500/10 flex items-center justify-center shrink-0">
+              <Shield className="h-5 w-5 text-violet-400" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-white mb-1">No Governance Token (Intentional)</h3>
+              <p className="text-white/40 text-sm leading-relaxed">
+                We are early-stage and compliance-focused. A governance token adds regulatory complexity without adding value at this stage. Instead, agents stake USDC in AgentRegistry to participate — skin in the game, not speculative tokenomics.
+              </p>
+            </div>
+          </div>
+
+          {/* Fee structure + revenue flows */}
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <h3 className="font-semibold text-white">Agent Fee Structure (x402)</h3>
+              <div className="flex flex-col gap-2">
+                {[
+                  { agent: "Research Agent", fee: "0.001 USDC", desc: "Per market analysis request", color: "text-violet-400", bg: "bg-violet-500/8 border-violet-500/20" },
+                  { agent: "Risk Agent", fee: "0.002 USDC", desc: "Per risk assessment", color: "text-amber-400", bg: "bg-amber-500/8 border-amber-500/20" },
+                  { agent: "Compliance Agent", fee: "0.0005 USDC", desc: "Per compliance check", color: "text-cyan-400", bg: "bg-cyan-500/8 border-cyan-500/20" },
+                  { agent: "Trading Agent", fee: "0.01 USDC", desc: "Per successful trade executed", color: "text-emerald-400", bg: "bg-emerald-500/8 border-emerald-500/20" },
+                ].map((item) => (
+                  <div key={item.agent} className={`glass-card rounded-xl p-4 border ${item.bg} flex items-center justify-between gap-3`}>
+                    <div className="flex flex-col gap-0.5">
+                      <span className={`text-sm font-semibold ${item.color}`}>{item.agent}</span>
+                      <span className="text-xs text-white/30">{item.desc}</span>
+                    </div>
+                    <span className="font-bold font-mono text-white text-sm">{item.fee}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <h3 className="font-semibold text-white">Revenue Flow</h3>
+              <div className="flex flex-col gap-3">
+                <div className="glass-card rounded-xl p-5 border border-white/8 flex flex-col gap-4">
+                  <div className="flex items-center gap-3 text-sm text-white/60">
+                    <div className="h-8 w-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                      <Network className="h-4 w-4 text-amber-400" />
+                    </div>
+                    <span>Agent fees collected via x402</span>
+                  </div>
+                  <div className="ml-4 flex flex-col gap-0.5">
+                    <div className="h-px w-full bg-white/8" />
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-white/60">
+                    <div className="h-8 w-8 rounded-lg bg-violet-500/10 flex items-center justify-center">
+                      <Cpu className="h-4 w-4 text-violet-400" />
+                    </div>
+                    <span>Routed through AgentRegistry contract</span>
+                  </div>
+                  <div className="ml-4 flex flex-col gap-0.5">
+                    <div className="h-px w-full bg-white/8" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="glass-card rounded-xl p-3 border border-red-500/20 text-center">
+                      <span className="text-2xl font-bold text-red-400">10%</span>
+                      <p className="text-xs text-white/30 mt-1">Protocol Insurance Fund</p>
+                    </div>
+                    <div className="glass-card rounded-xl p-3 border border-emerald-500/20 text-center">
+                      <span className="text-2xl font-bold text-emerald-400">90%</span>
+                      <p className="text-xs text-white/30 mt-1">Agent Earnings</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-card rounded-xl p-4 border border-amber-400/15 flex flex-col gap-2">
+                <h4 className="text-sm font-semibold text-white">Reputation Multiplier</h4>
+                <p className="text-xs text-white/40 leading-relaxed">
+                  Higher reputation agents earn more per service and clients pay lower fees when working with top-ranked agents. Performance creates compounding advantage.
+                </p>
+                <div className="flex items-center gap-2 mt-1">
+                  <Badge className="text-[9px] bg-amber-400/10 text-amber-400 border-amber-400/20">Higher rep = lower client fees</Badge>
+                  <Badge className="text-[9px] bg-emerald-400/10 text-emerald-400 border-emerald-400/20">Higher rep = higher agent earnings</Badge>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SLIDE 11: WHY BNB CHAIN ─── */}
+      <section
+        ref={(el) => { slideRefs.current[10] = el; }}
+        className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden"
+      >
+        <SlideNumber n={11} />
+        <GlowOrb className="w-[600px] h-[500px] top-0 left-1/2 -translate-x-1/2 bg-amber-400/8" />
+        <GlowOrb className="w-[400px] h-[300px] bottom-0 right-0 bg-yellow-500/5" />
+
+        <div className="relative z-10 w-full max-w-5xl flex flex-col gap-12">
+          <div className="text-center flex flex-col gap-4">
+            <div className="flex items-center justify-center gap-2">
+              <div className="h-8 w-8 rounded-full bg-amber-400/20 flex items-center justify-center">
+                <Zap className="h-4 w-4 text-amber-400" />
+              </div>
+              <p className="text-xs font-mono tracking-widest text-amber-400/80 uppercase">Why BNB Chain</p>
+            </div>
+            <h2 className="text-4xl sm:text-6xl font-bold leading-tight">
+              The only chain built<br />
+              <span className="text-amber-400">for this exact use case.</span>
+            </h2>
+            <p className="text-white/40 text-lg max-w-2xl mx-auto">
+              Not a generic L1. BNB Chain has the RWA ecosystem, the liquidity, and the agent infrastructure already in place.
+            </p>
+          </div>
+
+          {/* 6 reasons grid */}
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              {
+                icon: DollarSign,
+                title: "$3B+ RWA TVL",
+                desc: "#2 after Ethereum for tokenized real world assets. 360% holder growth in 2026. The ecosystem is here now.",
+                badge: "#2 RWA chain globally",
+                color: "text-amber-400",
+                bg: "bg-amber-500/8 border-amber-500/20",
+              },
+              {
+                icon: Cpu,
+                title: "34k+ ERC-8004 Agents",
+                desc: "More registered autonomous agents than any other chain. BNB Chain is the native home of the agent economy.",
+                badge: "Most agents on any chain",
+                color: "text-yellow-400",
+                bg: "bg-yellow-500/8 border-yellow-500/20",
+              },
+              {
+                icon: Zap,
+                title: "Sub-Second Finality",
+                desc: "3-second blocks, 20,000 TPS roadmap. Our 8-second agent cycles are economically viable and technically reliable here.",
+                badge: "20k TPS roadmap",
+                color: "text-amber-400",
+                bg: "bg-amber-500/8 border-amber-500/20",
+              },
+              {
+                icon: Rocket,
+                title: "BNB RWA Incentive Program",
+                desc: "Fast-track eligible for the BNB Chain RWA Incentive Program. Direct pathway to grants, co-marketing, and ecosystem support.",
+                badge: "Fast-track eligible",
+                color: "text-orange-400",
+                bg: "bg-orange-500/8 border-orange-500/20",
+              },
+              {
+                icon: Globe,
+                title: "Native RWA Liquidity",
+                desc: "USDY (Ondo), BUIDL (BlackRock), and PAXG (Paxos) natively available on BNB Chain. No bridging. No wrapped assets.",
+                badge: "USDY · BUIDL · PAXG native",
+                color: "text-yellow-400",
+                bg: "bg-yellow-500/8 border-yellow-500/20",
+              },
+              {
+                icon: BarChart3,
+                title: "Low Gas = Agent Viability",
+                desc: "Sub-cent fees mean our 8-second agent cycles don't erode yield. Frequent on-chain compliance checks are economically sustainable.",
+                badge: "Ideal for 8s agent cycles",
+                color: "text-amber-400",
+                bg: "bg-amber-500/8 border-amber-500/20",
+              },
+            ].map(({ icon: Icon, title, desc, badge, color, bg }) => (
+              <div key={title} className={`glass-card rounded-2xl p-5 border ${bg} flex flex-col gap-3`}>
+                <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${bg}`}>
+                  <Icon className={`h-5 w-5 ${color}`} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white mb-1">{title}</h3>
+                  <p className="text-white/40 text-xs leading-relaxed mb-2">{desc}</p>
+                  <Badge className={`text-[9px] ${bg} ${color} border-0`}>{badge}</Badge>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="glass-card rounded-2xl p-5 border border-amber-400/20 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+            <div className="h-12 w-12 rounded-2xl bg-amber-400/10 flex items-center justify-center shrink-0">
+              <Zap className="h-6 w-6 text-amber-400" />
+            </div>
+            <p className="text-white/50 text-sm">
+              BNB Chain is not just a deployment target. It is the only chain where <strong className="text-amber-400">$3B+ RWA TVL</strong>, <strong className="text-amber-400">34k+ autonomous agents</strong>, and <strong className="text-amber-400">sub-cent gas fees</strong> converge. That is our structural advantage no other chain can replicate today.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SLIDE 12: CTA ─── */}
+      <section
+        ref={(el) => { slideRefs.current[11] = el; }}
+        className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+      >
+        <SlideNumber n={12} />
         <GlowOrb className="w-[800px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-400/6" />
         <GlowOrb className="w-[400px] h-[300px] bottom-0 right-0 bg-cyan-500/6" />
 
