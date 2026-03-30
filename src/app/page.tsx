@@ -78,8 +78,8 @@ export default function Home() {
   return (
     <div className="relative flex flex-col min-h-screen overflow-x-hidden">
       {/* Nav */}
-      <nav className="nav-glass sticky top-0 z-50 px-6 py-3">
-        <div className="mx-auto max-w-6xl flex items-center justify-between">
+      <nav className="nav-glass sticky top-0 z-50 px-8 lg:px-16 py-4">
+        <div className="mx-auto max-w-7xl flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
               <BarChart3 className="h-4.5 w-4.5 text-primary" />
@@ -106,36 +106,36 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="relative px-6 pt-28 pb-20">
+      <section className="relative px-8 lg:px-16 pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="hero-glow" />
         <div className="hero-glow-accent" />
         <div className="relative z-10 mx-auto max-w-4xl flex flex-col items-center text-center">
-          <div className="flex items-center gap-2 mb-8">
+          <div className="flex items-center gap-2 mb-10">
             <div className="glow-badge flex items-center gap-2 px-4 py-1.5 rounded-full text-sm">
               <div className="pulse-dot" />
               <span className="text-muted-foreground">Live on BNB Chain</span>
             </div>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight leading-[1.05] mb-8">
             The Intelligence Layer{" "}
             <br />
             <span className="gradient-text">for Real World Assets</span>
           </h1>
 
-          <p className="max-w-2xl text-lg sm:text-xl text-muted-foreground leading-relaxed mb-10">
+          <p className="max-w-2xl text-lg sm:text-xl text-muted-foreground leading-relaxed mb-12">
             5 autonomous AI agents research, assess risk, ensure compliance, trade,
             and rebalance tokenized treasuries, gold, and yield products on BNB Chain.
           </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <Link href="/dashboard">
-              <button className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground text-base font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20">
+              <button className="flex items-center gap-2.5 px-9 py-4 rounded-xl bg-primary text-primary-foreground text-base font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20">
                 Open Dashboard <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
             <Link href="/pitch">
-              <button className="flex items-center gap-2 px-8 py-3.5 rounded-xl border border-border text-base font-medium hover:bg-card/50 transition-all">
+              <button className="flex items-center gap-2.5 px-9 py-4 rounded-xl border border-border/60 text-base font-medium hover:bg-card/50 transition-all">
                 View Pitch Deck <ChevronRight className="h-4 w-4" />
               </button>
             </Link>
@@ -144,16 +144,16 @@ export default function Home() {
       </section>
 
       {/* Metrics */}
-      <section className="relative z-10 px-6 py-1">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <section className="relative z-10 px-8 lg:px-16 py-16 lg:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
               { value: "6", label: "RWA Tokens", sub: "BNB Chain" },
               { value: "3.8%", label: "Avg APY", sub: "Yield Bearing" },
               { value: "5", label: "AI Agents", sub: "Autonomous" },
               { value: "8s", label: "Cycle Time", sub: "Continuous" },
             ].map((m) => (
-              <div key={m.label} className="metric-card flex flex-col items-center gap-1 py-6 px-4">
+              <div key={m.label} className="metric-card flex flex-col items-center gap-2 py-8 px-6">
                 <span className="text-3xl sm:text-4xl font-bold gradient-text stat-value">{m.value}</span>
                 <span className="text-sm font-medium mt-1">{m.label}</span>
                 <span className="text-xs text-muted-foreground">{m.sub}</span>
@@ -164,25 +164,25 @@ export default function Home() {
       </section>
 
       {/* Divider */}
-      <div className="my-16 section-divider" />
+      <div className="section-divider" />
 
       {/* Agent Architecture */}
-      <section className="relative z-10 px-6 pb-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-14">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-3">Architecture</p>
+      <section className="relative z-10 px-8 lg:px-16 py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-4">Architecture</p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Multi-Agent System</h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto text-lg">
+            <p className="mt-5 text-muted-foreground max-w-lg mx-auto text-lg">
               Five specialized agents work in concert, each mastering one domain
               of RWA portfolio management.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {agents.map((agent) => {
               const Icon = agent.icon;
               return (
-                <div key={agent.name} className="glass-card rounded-xl p-6 group">
+                <div key={agent.name} className="glass-card rounded-xl p-7 group">
                   <div className="flex items-start gap-4">
                     <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-card/50 border ${agent.borderColor}`}>
                       <Icon className={`h-5 w-5 ${agent.color}`} />
@@ -202,27 +202,27 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="relative z-10 px-6 py-20">
-        <div className="mx-auto max-w-3xl">
-          <div className="text-center mb-14">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-3">Process</p>
+      <section className="relative z-10 px-8 lg:px-16 py-20 lg:py-28">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-4">Process</p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Intelligence Loop</h2>
-            <p className="mt-4 text-muted-foreground text-lg">
+            <p className="mt-5 text-muted-foreground text-lg">
               Every 8 seconds, the agent system runs a complete cycle.
             </p>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-5">
             {steps.map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.num} className="glass-card rounded-xl p-5 flex items-center gap-5 group">
+                <div key={item.num} className="glass-card rounded-xl p-6 flex items-center gap-5 group">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/5 border border-primary/20">
                     <span className="text-sm font-bold text-primary/70">{item.num}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-0.5">{item.desc}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
                   </div>
                   <Icon className={`h-5 w-5 ${item.color} shrink-0 hidden sm:block opacity-50 group-hover:opacity-100 transition-opacity`} />
                 </div>
@@ -236,19 +236,19 @@ export default function Home() {
       <div className="section-divider" />
 
       {/* Supported Assets */}
-      <section className="relative z-10 px-6 py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-14">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-3">Assets</p>
+      <section className="relative z-10 px-8 lg:px-16 py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-4">Assets</p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Supported RWA Tokens</h2>
-            <p className="mt-4 text-muted-foreground text-lg">
+            <p className="mt-5 text-muted-foreground text-lg">
               Tokenized treasuries, gold, stablecoins, and liquid staking on BNB Chain.
             </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {tokens.map((token) => (
-              <div key={token.symbol} className="token-card p-5">
-                <div className="flex items-start justify-between mb-3">
+              <div key={token.symbol} className="token-card p-7">
+                <div className="flex items-start justify-between mb-4">
                   <div>
                     <div className="flex items-center gap-2.5">
                       <span className={`text-xl font-bold ${token.color}`}>{token.symbol}</span>
@@ -256,20 +256,20 @@ export default function Home() {
                         {token.type}
                       </span>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">{token.name}</p>
+                    <p className="text-xs text-muted-foreground mt-1.5">{token.name}</p>
                   </div>
                 </div>
-                <div className="flex items-end justify-between pt-3 border-t border-border/30">
+                <div className="flex items-end justify-between pt-4 border-t border-border/30">
                   <div>
                     <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Protocol</p>
-                    <p className="text-xs font-medium mt-0.5">{token.protocol}</p>
+                    <p className="text-xs font-medium mt-1">{token.protocol}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] text-muted-foreground uppercase tracking-wider">APY</p>
                     <p className="text-lg font-bold text-emerald-400 stat-value">{token.apy}</p>
                   </div>
                 </div>
-                <div className="mt-2 text-right">
+                <div className="mt-3 text-right">
                   <span className="text-[10px] text-muted-foreground">TVL: {token.tvl}</span>
                 </div>
               </div>
@@ -279,16 +279,16 @@ export default function Home() {
       </section>
 
       {/* Why BNB Chain */}
-      <section className="relative z-10 px-6 py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-14">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-3">Infrastructure</p>
+      <section className="relative z-10 px-8 lg:px-16 py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary/70 font-medium mb-4">Infrastructure</p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Built on BNB Chain</h2>
-            <p className="mt-4 text-muted-foreground text-lg">
+            <p className="mt-5 text-muted-foreground text-lg">
               The fastest and most cost-effective chain for autonomous agent execution.
             </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: Zap, title: "3s Blocks", desc: "Ultra-fast agent cycles" },
               { icon: Lock, title: "$0.01 Fees", desc: "Sub-cent rebalancing" },
@@ -297,12 +297,12 @@ export default function Home() {
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="glass-card rounded-xl p-5 text-center">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/5 border border-primary/20 mx-auto mb-3">
+                <div key={item.title} className="glass-card rounded-xl p-6 text-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 border border-primary/20 mx-auto mb-4">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+                  <p className="text-xs text-muted-foreground mt-1.5">{item.desc}</p>
                 </div>
               );
             })}
@@ -311,12 +311,12 @@ export default function Home() {
       </section>
 
       {/* Trust / Partners */}
-      <section className="relative z-10 px-6 py-12">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground/50 mb-6">
+      <section className="relative z-10 px-8 lg:px-16 py-16 lg:py-20">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground/50 mb-8">
             Integrated Protocols & Partners
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
             {["Ondo Finance", "BlackRock/Securitize", "Paxos", "Lista DAO", "Ankr", "PancakeSwap", "Venus Protocol"].map((p) => (
               <span key={p} className="text-sm text-muted-foreground/40 font-medium tracking-wide">{p}</span>
             ))}
@@ -328,9 +328,9 @@ export default function Home() {
       <div className="section-divider" />
 
       {/* CTA */}
-      <section className="relative z-10 px-6 py-28">
+      <section className="relative z-10 px-8 lg:px-16 py-28 lg:py-36">
         <div className="hero-glow" style={{ top: "-100px" }} />
-        <div className="relative z-10 mx-auto max-w-2xl text-center flex flex-col items-center gap-6">
+        <div className="relative z-10 mx-auto max-w-2xl text-center flex flex-col items-center gap-8">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">
             Autonomous RWA
             <br />
@@ -340,14 +340,14 @@ export default function Home() {
             Let AI agents handle research, risk, compliance, and execution
             while you focus on strategy.
           </p>
-          <div className="flex items-center gap-4 mt-4">
+          <div className="flex items-center gap-5 mt-4">
             <Link href="/dashboard">
-              <button className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground text-base font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20">
+              <button className="flex items-center gap-2.5 px-9 py-4 rounded-xl bg-primary text-primary-foreground text-base font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20">
                 Try the Demo <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
             <Link href="/pitch">
-              <button className="flex items-center gap-2 px-8 py-3.5 rounded-xl border border-border text-base font-medium hover:bg-card/50 transition-all">
+              <button className="flex items-center gap-2.5 px-9 py-4 rounded-xl border border-border/60 text-base font-medium hover:bg-card/50 transition-all">
                 Pitch Deck
               </button>
             </Link>
@@ -356,8 +356,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-border/30 px-6 py-8">
-        <div className="mx-auto max-w-5xl flex items-center justify-between text-xs text-muted-foreground/50">
+      <footer className="relative z-10 border-t border-border/30 px-8 lg:px-16 py-12">
+        <div className="mx-auto max-w-6xl flex items-center justify-between text-xs text-muted-foreground/50">
           <div className="flex items-center gap-2">
             <BarChart3 className="h-3.5 w-3.5" />
             <span>RWA Agent</span>

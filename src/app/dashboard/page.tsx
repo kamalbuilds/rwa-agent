@@ -129,10 +129,10 @@ export default function DashboardPage() {
       )}
 
       {/* Dashboard Grid */}
-      <div className="flex-1 overflow-auto p-4 lg:p-6">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-4">
+      <div className="flex-1 overflow-auto p-5 lg:p-8">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-6">
           {/* Row 1: Portfolio + Risk */}
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <PortfolioOverview />
             </div>
@@ -140,7 +140,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Row 2: Chart + Yields */}
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <PnlChart />
             </div>
